@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.os.Binder;
 import android.os.IBinder;
+import android.widget.ImageView;
 
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -60,4 +61,5 @@ public class Fetch extends Service {
 
         queue.add(jsonObjectRequest);
     }
+
 }
