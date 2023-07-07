@@ -17,6 +17,7 @@ import org.json.JSONObject;
 
 public class Fetch extends Service {
     private final IBinder binder = new FetchBinder();
+    private final String apiKey = "55d4ab2d730d4f278cc4e533c8ae8517";
     private RequestQueue queue;
 
     public Fetch() {
@@ -41,7 +42,11 @@ public class Fetch extends Service {
     }
 
     public void get(String url, String[][] queries, Response.Listener<JSONObject> cb) throws Exception {
-        String finalUrl = url + "?";
+        String finalUrl = url;
+
+
+        finalUrl += "?apiKey="+ apiKey + (queries.length > 0 ? "&": "");
+
 
         for (int i = 0; i < queries.length; i++) {
             finalUrl += queries[i][0] + "=" + queries[i][1] + (i != queries.length -1 ? "&": "");
