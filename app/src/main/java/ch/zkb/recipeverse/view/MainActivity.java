@@ -221,11 +221,11 @@ public class MainActivity extends AppCompatActivity {
             Fetch.FetchBinder binder = (Fetch.FetchBinder) service;
             fetch = binder.getService();
 
-            createRow("noodles,main course", 2, noodlesLayout);
+            createRow("noodles,main course", 5, noodlesLayout);
 
-            createRow("vegetarian,main course", 2, vegi_layout);
+            createRow("vegetarian,main course", 5, vegi_layout);
 
-            createRow("italian,main course", 2, italian_layout);
+            createRow("italian,main course", 5, italian_layout);
 
         }
 

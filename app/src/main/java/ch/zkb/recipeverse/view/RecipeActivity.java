@@ -88,7 +88,7 @@ public class RecipeActivity extends AppCompatActivity {
             Recipe recipe = recipeDao.getByID(id);
 
             if(recipe != null) {
-
+                saved = true;
 
                 runOnUiThread(() -> {
                     save.setImageResource(R.drawable.baseline_delete_24);
@@ -106,18 +106,23 @@ public class RecipeActivity extends AppCompatActivity {
                     runOnUiThread(() -> {
                         save.setImageResource(R.drawable.baseline_save_24);
 
+                        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                        v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+                        Toast.makeText(ctx, "**Vibrating**", Toast.LENGTH_LONG).show();
+
                     });
                 }else{
                     recipeDao.insertAll(recipe);
                     runOnUiThread(() -> {
                         save.setImageResource(R.drawable.baseline_delete_24);
 
+                        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                        v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+                        Toast.makeText(ctx, "**Vibrating**", Toast.LENGTH_LONG).show();
                     });
                 }
 
-                Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
-                Toast.makeText(ctx, "**Vibrating**", Toast.LENGTH_LONG);
+
 
             });
 
