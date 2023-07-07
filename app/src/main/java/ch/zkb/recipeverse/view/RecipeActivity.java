@@ -10,8 +10,11 @@ import android.content.Intent;
 import android.content.ServiceConnection;
 import android.graphics.drawable.Drawable;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.text.Html;
 import android.util.Log;
 import android.view.ContextThemeWrapper;
@@ -98,7 +101,24 @@ public class RecipeActivity extends AppCompatActivity {
             AsyncTask.execute(()->{
                 RecipeDao recipeDao = db.recipeDao();
 
-                recipeDao.insertAll(recipe);
+                if(saved){
+                    recipeDao.delete(recipe);
+                    runOnUiThread(() -> {
+                        save.setImageResource(R.drawable.baseline_save_24);
+
+                    });
+                }else{
+                    recipeDao.insertAll(recipe);
+                    runOnUiThread(() -> {
+                        save.setImageResource(R.drawable.baseline_delete_24);
+
+                    });
+                }
+
+                Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                v.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE));
+                Toast.makeText(ctx, "**Vibrating**", Toast.LENGTH_LONG);
+
             });
 
         }));
